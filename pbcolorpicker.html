@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <style>
+            body{
+                /*zoom: 200%;*/
+                font-family: 'Courier New', Courier, monospace;
+            }
+            table, tr, td {
+                border-collapse: collapse;
+                border:1px solid black;
+            }
+            input{
+                height:50px;
+                display:inline;
+                font-size:3em;
+            }
+            #wrap{
+                margin-left:auto;
+                margin-right: auto;
+                width: 350px;
+            }
+            #pbcolor{
+                width:300px;
+                float:right;
+            }
+            table{
+                width:100%;
+            }
+            h4{
+                margin-bottom: 0;
+            }
+            h2{
+                margin-top:0;
+            }
+            #formula{
+                font-size: 12px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div id="wrap">
+            <h4>Powerbuilder</h4>
+            <h2>Color Picker</h2>
+        <p id="formula">The formula to generate the long value is: <br>(65536*Blue) + (256*Green) + (Red)</p>
+        <input type="color" id="color"><input type="text" id="pbcolor">
+        <br><br>
+        <table cellspacing="1" border="0">
+   
+            <tr><th colspan="4" align="left">System Colors</th><th>&nbsp;
+            </th></tr><tr><td colspan="4">Windows Text</td>
+            <td align="right">33554432</td></tr>
+            <tr>
+            <td colspan="4">
+            Button Face</td>
+            <td align="right">67108864</td></tr>
+            <tr>
+            <td colspan="4">
+            Scrollbar</td>
+            <td align="right">134217728</td></tr>
+            <tr>
+            <td colspan="4">
+            Application  Workspace</td>
+            <td align="right">268435456</td></tr>
+            <tr>
+            <td colspan="4">
+            Transparent</td>
+            <td align="right">536870912</td></tr>
+            <tr>
+            <td colspan="4">
+            Windows Background</td>
+            <td align="right">
+            1073741824</td></tr></tbody></table>
+        </div>
+    </body>
+    <script>
+        function hexToRgb(hex) {
+            return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
+        }
+        function rgbToPB(rgb){
+            return rgb[0] + rgb[1]*256 + rgb[2]*65536
+        }
+        window.addEventListener('DOMContentLoaded', (event) => {
+            
+        });
+        var input = document.getElementById('color')
+        var output = document.getElementById('pbcolor')
+        var formula = document.getElementById('formula')
+        input.addEventListener("input",function(){
+            rgb = hexToRgb(input.value)
+            output.value = rgbToPB(rgb)
+            formula.innerHTML = 'The formula to generate the long value is: <br>(65536*'+rgb[2]+') + (256*'+rgb[1]+') + ('+rgb[0]+')'
+        })
+    </script>
+</html>
