@@ -74,6 +74,11 @@
         </div>
     </body>
     <script>
+        function rgbToHex(r,g,b){
+            return "#" + [r, g, b]
+                .map(x => x.toString(16).padStart(2, '0'))
+                .join('');
+        }
         function hexToRgb(hex) {
             return ['0x' + hex[1] + hex[2] | 0, '0x' + hex[3] + hex[4] | 0, '0x' + hex[5] + hex[6] | 0];
         }
@@ -91,5 +96,11 @@
             output.value = rgbToPB(rgb)
             formula.innerHTML = 'The formula to generate the long value is: <br>(65536*'+rgb[2]+') + (256*'+rgb[1]+') + ('+rgb[0]+')'
         })
+        output.addEventListener("change",function(){
+            b =  Math.floor(output.value / 65536)
+            g =  Math.floor((output.value % 65536) / 256)
+            r = output.value % 256
+            input.value = rgbToHex(r, g, b)
+        })
     </script>
-</html>
+</html> 
